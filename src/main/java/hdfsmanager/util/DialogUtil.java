@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import org.apache.log4j.Logger;
 
-import hdfsmanager.mvc.controller.PreviewController;
+import hdfsmanager.controller.PreviewController;
 
 public final class DialogUtil {
 

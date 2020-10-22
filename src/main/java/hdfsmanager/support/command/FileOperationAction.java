@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import org.apache.hadoop.fs.FileStatus;
 
-import hdfsmanager.mvc.controller.MainController;
+import hdfsmanager.controller.MainController;
 
 @FunctionalInterface
 public interface FileOperationAction {

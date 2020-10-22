@@ -1,9 +1,9 @@
 package hdfsmanager;
 
-import hdfsmanager.mvc.controller.LoginController;
+import hdfsmanager.controller.LoginController;
 
 public class App {
-    public static void main(String[] args) {
-        new LoginController();
-    }
+	public static void main(String[] args) {
+		new LoginController();
+	}
 }

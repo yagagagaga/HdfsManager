@@ -9,7 +9,7 @@ import javax.swing.*;
 import org.apache.hadoop.fs.FileStatus;
 
 import hdfsmanager.support.command.ActionEnum;
-import hdfsmanager.mvc.controller.MainController;
+import hdfsmanager.controller.MainController;
 
 public final class PopupMenuUtil extends JPopupMenu {
 
