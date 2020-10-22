@@ -1,4 +1,4 @@
-package hdfsmanager.api.dao;
+package hdfsmanager.dao;
 
 import java.io.File;
 import java.io.IOException;

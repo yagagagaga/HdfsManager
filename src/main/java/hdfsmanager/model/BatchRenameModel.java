@@ -9,7 +9,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.log4j.Logger;
 
 import hdfsmanager.api.Model;
-import hdfsmanager.api.dao.HdfsDao;
+import hdfsmanager.dao.HdfsDao;
 import hdfsmanager.util.PathUtil;
 
 public class BatchRenameModel extends Model {

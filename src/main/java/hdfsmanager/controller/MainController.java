@@ -18,9 +18,9 @@ import org.apache.log4j.Logger;
 
 import hdfsmanager.api.Controller;
 import hdfsmanager.api.View;
-import hdfsmanager.api.dao.AppStatusDao;
-import hdfsmanager.api.dao.impl.AppStatusDaoImpl;
-import hdfsmanager.api.dao.impl.HdfsDaoImpl;
+import hdfsmanager.dao.AppStatusDao;
+import hdfsmanager.dao.impl.AppStatusDaoImpl;
+import hdfsmanager.dao.impl.HdfsDaoImpl;
 import hdfsmanager.model.BatchRenameModel;
 import hdfsmanager.model.HdfsModel;
 import hdfsmanager.view.MainView;

@@ -1,4 +1,4 @@
-package hdfsmanager.api.dao.impl;
+package hdfsmanager.dao.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -19,7 +19,7 @@ import org.apache.hadoop.fs.*;
 import org.apache.hadoop.fs.permission.FsPermission;
 import org.apache.log4j.Logger;
 
-import hdfsmanager.api.dao.HdfsDao;
+import hdfsmanager.dao.HdfsDao;
 import hdfsmanager.exception.UnexpectedException;
 import hdfsmanager.support.io.DownloadDirTask;
 import hdfsmanager.support.io.DownloadFileTask;

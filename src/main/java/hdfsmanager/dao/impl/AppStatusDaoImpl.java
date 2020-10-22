@@ -1,4 +1,4 @@
-package hdfsmanager.api.dao.impl;
+package hdfsmanager.dao.impl;
 
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +7,7 @@ import hdfsmanager.util.PathUtil;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.Path;
 
-import hdfsmanager.api.dao.AppStatusDao;
+import hdfsmanager.dao.AppStatusDao;
 
 public class AppStatusDaoImpl implements AppStatusDao {
 

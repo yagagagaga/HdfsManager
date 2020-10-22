@@ -1,4 +1,4 @@
-package hdfsmanager.api.dao;
+package hdfsmanager.dao;
 
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.Path;
