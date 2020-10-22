@@ -17,8 +17,8 @@ import org.apache.hadoop.fs.permission.FsPermission;
 import org.apache.log4j.Logger;
 
 import hdfsmanager.api.Model;
-import hdfsmanager.api.dao.AppStatusDao;
-import hdfsmanager.api.dao.HdfsDao;
+import hdfsmanager.dao.AppStatusDao;
+import hdfsmanager.dao.HdfsDao;
 import hdfsmanager.support.command.CommandManager;
 import hdfsmanager.support.command.GotoPathCmd;
 import hdfsmanager.support.io.DownloadFileTask;

@@ -7,8 +7,7 @@ import java.util.List;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.Path;
 
-import hdfsmanager.api.dao.HdfsDao;
-import hdfsmanager.api.dao.impl.HdfsDaoImpl;
+import hdfsmanager.dao.HdfsDao;
 import hdfsmanager.support.io.base.BaseDirTask;
 import hdfsmanager.support.io.base.TaskType;
 

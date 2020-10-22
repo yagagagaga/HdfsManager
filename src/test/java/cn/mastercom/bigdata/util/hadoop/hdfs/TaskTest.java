@@ -1,12 +1,12 @@
 package cn.mastercom.bigdata.util.hadoop.hdfs;
 
-import hdfsmanager.api.dao.HdfsDao;
+import hdfsmanager.dao.HdfsDao;
 import hdfsmanager.support.io.UploadFileTask;
 import hdfsmanager.support.io.base.BaseTask;
 import hdfsmanager.support.io.base.TaskStatus;
 import hdfsmanager.support.io.DownloadDirTask;
 import hdfsmanager.support.io.UploadDirTask;
-import hdfsmanager.api.dao.impl.HdfsDaoImpl;
+import hdfsmanager.dao.impl.HdfsDaoImpl;
 import org.junit.Ignore;
 import org.junit.Test;
 
