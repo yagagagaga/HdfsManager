@@ -1,5 +1,9 @@
 package hdfsmanager.api;
 
+import java.awt.dnd.DropTargetAdapter;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
 import java.awt.event.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -12,7 +16,7 @@ import javax.swing.event.TreeExpansionListener;
 
 import hdfsmanager.util.GuiUtil;
 
-public abstract class View<C extends Controller<?, ?>, M extends Model> implements
+public abstract class View<C extends Controller<?, ?>, M extends Model> extends DropTargetAdapter implements
 		Observer,
 		ActionListener,
 		MouseListener,
@@ -129,5 +133,9 @@ public abstract class View<C extends Controller<?, ?>, M extends Model> implemen
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
+		/* 子类需要时实现 */ }
+
+	@Override
+	public void drop(DropTargetDropEvent dtde) {
 		/* 子类需要时实现 */ }
 }

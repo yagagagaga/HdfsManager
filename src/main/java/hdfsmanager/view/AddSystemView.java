@@ -40,4 +40,5 @@ public class AddSystemView extends View<AddSystemController, AddSystemModel> {
 	protected JComponent getMainView() {
 		return viewPanel;
 	}
+
 }

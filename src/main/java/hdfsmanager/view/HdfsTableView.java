@@ -3,8 +3,15 @@ package hdfsmanager.view;
 import static hdfsmanager.support.command.ActionEnum.*;
 
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.*;
@@ -14,18 +21,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import io.vavr.Tuple2;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.log4j.Logger;
 
 import hdfsmanager.api.View;
-import hdfsmanager.support.command.ActionEnum;
 import hdfsmanager.controller.HdfsTableController;
 import hdfsmanager.model.HdfsModel;
-import hdfsmanager.util.PopupMenuUtil;
-import hdfsmanager.util.DateUtil;
-import hdfsmanager.util.FileUtil;
-import hdfsmanager.util.GuiUtil;
+import hdfsmanager.support.command.ActionEnum;
+import hdfsmanager.util.*;
+import io.vavr.Tuple2;
 
 public class HdfsTableView extends View<HdfsTableController, HdfsModel> {
 
@@ -95,6 +99,7 @@ public class HdfsTableView extends View<HdfsTableController, HdfsModel> {
 		table.addMouseListener(this);
 		table.addKeyListener(this);
 		table.getSelectionModel().addListSelectionListener(this);
+		new DropTarget(viewPanel, this);
 	}
 
 	@Override
@@ -208,6 +213,34 @@ public class HdfsTableView extends View<HdfsTableController, HdfsModel> {
 			data[5] = f.getModificationTime();
 			tm.addRow(data);
 		}
+	}
+
+	@Override
+	public void drop(DropTargetDropEvent dtde) {
+		try {
+			if (!dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+				return;
+			}
+			dtde.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
+			@SuppressWarnings("unchecked")
+			List<File> files = (List<File>) dtde.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+			dropToUpload(files);
+			dtde.dropComplete(true);
+		} catch (UnsupportedFlavorException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void dropToUpload(List<File> files) {
+		if (files.isEmpty())
+			return;
+		final String s = files.stream()
+				.map(File::toString)
+				.reduce((a, b) -> a + "\n" + b)
+				.get();
+		final boolean accept = DialogUtil.confirm(s, "是否上传以下文件", MsgType.INFORMATION);
+		if (accept)
+			controller.upload(files.toArray(new File[0]));
 	}
 
 	private static class MyTableModel extends DefaultTableModel {

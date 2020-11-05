@@ -9,13 +9,13 @@ public final class Action {
 		throw new IllegalStateException("工具类不能被初始化");
 	}
 
-	static FileOperationAction unCompleteAction = (trigger, dao, fileStatuses) -> DialogUtil.show("暂未实现", "", MsgType.INFORMATION);
+	static FileOperationAction unCompleteAction = (trigger, ctr, fileStatuses) -> DialogUtil.show("暂未实现", "", MsgType.INFORMATION);
 
 	static FileOperationAction downAction = (trigger, ctr, fileStatuses) -> ctr.download(fileStatuses);
 
 	static FileOperationAction down5MAction = (trigger, ctr, fileStatuses) -> ctr.download5M(fileStatuses);
 
-	static FileOperationAction uploadAction = (trigger, ctr, fileStatuses) -> ctr.upload(fileStatuses);
+	static FileOperationAction uploadAction = (trigger, ctr, fileStatuses) -> ctr.uploadTo(fileStatuses);
 
 	static FileOperationAction newFolderAction = (trigger, ctr, fileStatuses) -> ctr.newFolder(fileStatuses);
 

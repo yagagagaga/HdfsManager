@@ -57,7 +57,7 @@ public class MainController<V extends View<?, ?>> extends Controller<HdfsModel, 
 	public static void startWith(String loginUrl, String loginUser) {
 		HdfsModel hdfsModel = new HdfsModel(
 				new HdfsDaoImpl(loginUrl, loginUser),
-				AppStatusDaoImpl.getOrCreate());
+				AppStatusDaoImpl.getOrCreate(loginUrl));
 
 		MainBottomController mainBottomController = new MainBottomController();
 
@@ -99,6 +99,10 @@ public class MainController<V extends View<?, ?>> extends Controller<HdfsModel, 
 
 	public void upload() {
 		File[] files = DialogUtil.chooseFiles(JFileChooser.FILES_AND_DIRECTORIES, "请选择要上传的文件(夹)");
+		upload(files);
+	}
+
+	public void upload(File[] files) {
 		Path hdfsDstPath = model.getCurrentPath();
 		for (File f : files) {
 			BaseTask task = model.uploadToHdfs(f, hdfsDstPath);
@@ -107,7 +111,7 @@ public class MainController<V extends View<?, ?>> extends Controller<HdfsModel, 
 		}
 	}
 
-	public void upload(FileStatus[] fileStatuses) {
+	public void uploadTo(FileStatus[] fileStatuses) {
 		if (fileStatuses.length != 1) {
 			DialogUtil.show("你不能同时把文件(夹)上传到多个目录上", "非法操作", MsgType.ERROR);
 			return;

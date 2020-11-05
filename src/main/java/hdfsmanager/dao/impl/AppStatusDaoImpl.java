@@ -15,9 +15,11 @@ public class AppStatusDaoImpl implements AppStatusDao {
 	private List<FileStatus> filesInCurrentPath;
 	private FileStatus[] selectedFileStatuses;
 	private PasteStatus status;
+	private final String hdfsUrl;
 
-	private AppStatusDaoImpl() {
-		this.currentPath = new Path("/");
+	private AppStatusDaoImpl(String hdfsUrl) {
+		this.hdfsUrl = hdfsUrl;
+		this.currentPath = PathUtil.addPath(hdfsUrl, "");
 		this.filesInCurrentPath = Collections.emptyList();
 		this.selectedFileStatuses = new FileStatus[0];
 		this.status = PasteStatus.NONE;
@@ -45,7 +47,7 @@ public class AppStatusDaoImpl implements AppStatusDao {
 
 	@Override
 	public synchronized void setCurrentPathAndFiles(Path currentPath, List<FileStatus> filesInCurrentPath) {
-		this.currentPath = currentPath;
+		this.currentPath = PathUtil.completedPath(hdfsUrl, currentPath.toString());
 		this.filesInCurrentPath = filesInCurrentPath;
 	}
 
@@ -68,9 +70,9 @@ public class AppStatusDaoImpl implements AppStatusDao {
 
 	private static AppStatusDao dao = null;
 
-	public static synchronized AppStatusDao getOrCreate() {
+	public static synchronized AppStatusDao getOrCreate(String hdfsUrl) {
 		if (dao == null) {
-			dao = new AppStatusDaoImpl();
+			dao = new AppStatusDaoImpl(hdfsUrl);
 		}
 		return dao;
 	}

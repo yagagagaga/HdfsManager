@@ -1,13 +1,14 @@
 package hdfsmanager.view;
 
+import javax.swing.*;
+
+import org.apache.hadoop.fs.permission.FsPermission;
+
 import hdfsmanager.api.View;
 import hdfsmanager.controller.ChPermissionAndOwnerController;
 import hdfsmanager.model.HdfsModel;
 import hdfsmanager.util.AnimationUtil;
 import hdfsmanager.util.GuiUtil;
-import org.apache.hadoop.fs.permission.FsPermission;
-
-import javax.swing.*;
 
 public class ChPermissionAndOwnerView extends View<ChPermissionAndOwnerController, HdfsModel> {
 
@@ -73,4 +74,5 @@ public class ChPermissionAndOwnerView extends View<ChPermissionAndOwnerControlle
 		viewFrame.pack();
 		AnimationUtil.shakeFrame(viewFrame);
 	}
+
 }

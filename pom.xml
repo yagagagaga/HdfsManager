@@ -41,12 +41,6 @@
         </dependency>
 
         <dependency>
-            <groupId>ch.ethz.ganymed</groupId>
-            <artifactId>ganymed-ssh2</artifactId>
-            <version>262</version>
-        </dependency>
-
-        <dependency>
             <groupId>io.vavr</groupId>
             <artifactId>vavr</artifactId>
             <version>0.9.2</version>
@@ -57,30 +51,6 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.intellij</groupId>
-            <artifactId>javac2</artifactId>
-            <version>7.0.3</version>
-            <scope>system</scope>
-            <systemPath>C:/Program Files/JetBrains/IntelliJ IDEA 2020.1.1/lib/javac2.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>com.intellij</groupId>
-            <artifactId>forms_rt</artifactId>
-            <version>7.0.3</version>
-            <scope>system</scope>
-            <systemPath>C:/Program Files/JetBrains/IntelliJ IDEA 2020.1.1/lib/forms_rt.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>com.intellij</groupId>
-            <artifactId>asm-all</artifactId>
-            <version>7.0.1</version>
-            <scope>system</scope>
-            <systemPath>C:/Program Files/JetBrains/IntelliJ IDEA 2020.1.1/lib/asm-all-7.0.1.jar</systemPath>
         </dependency>
 
         <!--<dependency>-->

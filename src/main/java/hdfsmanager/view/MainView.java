@@ -10,8 +10,8 @@ import org.apache.hadoop.fs.Path;
 import org.apache.log4j.Logger;
 
 import hdfsmanager.api.View;
-import hdfsmanager.exception.UnexpectedException;
 import hdfsmanager.controller.MainController;
+import hdfsmanager.exception.UnexpectedException;
 import hdfsmanager.model.HdfsModel;
 import hdfsmanager.support.component.LoadingPanel;
 import hdfsmanager.util.GuiUtil;
@@ -199,4 +199,5 @@ public class MainView extends View<MainController<MainView>, HdfsModel> {
 	protected JComponent getMainView() {
 		return viewPanel;
 	}
+
 }

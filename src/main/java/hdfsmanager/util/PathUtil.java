@@ -1,6 +1,5 @@
 package hdfsmanager.util;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.fs.Path;
 
 public final class PathUtil {
@@ -15,9 +14,23 @@ public final class PathUtil {
 
 	public static Path addPath(String parent, String name) {
 		if (parent.endsWith("/")) {
-			return new Path(parent + name);
+			if (name.startsWith("/"))
+				return new Path(parent + name.substring(1));
+			else
+				return new Path(parent + name);
 		} else {
-			return new Path(parent + "/" + name);
+			if (name.startsWith("/"))
+				return new Path(parent + name);
+			else
+				return new Path(parent + "/" + name);
+		}
+	}
+
+	public static Path completedPath(String hdfsUrl, String path) {
+		if (path.startsWith(hdfsUrl)) {
+			return new Path(path);
+		} else {
+			return addPath(hdfsUrl, path);
 		}
 	}
 

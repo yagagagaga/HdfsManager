@@ -14,19 +14,19 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import hdfsmanager.support.component.RowHeaderTable;
-import hdfsmanager.support.io.base.TaskType;
-import hdfsmanager.util.DateUtil;
-import hdfsmanager.util.GuiUtil;
 import org.apache.log4j.Appender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.WriterAppender;
 
 import hdfsmanager.api.View;
-import hdfsmanager.exception.UnexpectedException;
 import hdfsmanager.controller.MainBottomController;
+import hdfsmanager.exception.UnexpectedException;
 import hdfsmanager.model.DownUploadTaskModel;
+import hdfsmanager.support.component.RowHeaderTable;
 import hdfsmanager.support.io.base.BaseTask;
+import hdfsmanager.support.io.base.TaskType;
+import hdfsmanager.util.DateUtil;
+import hdfsmanager.util.GuiUtil;
 
 public class MainBottomView extends View<MainBottomController, DownUploadTaskModel> {
 
@@ -285,4 +285,5 @@ public class MainBottomView extends View<MainBottomController, DownUploadTaskMod
 		}
 		progressBar.setValue(count);
 	}
+
 }

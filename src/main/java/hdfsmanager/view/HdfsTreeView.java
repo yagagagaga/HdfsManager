@@ -15,14 +15,14 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import hdfsmanager.util.PathUtil;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.Path;
 
 import hdfsmanager.api.View;
-import hdfsmanager.support.command.ActionEnum;
 import hdfsmanager.controller.HdfsTreeController;
 import hdfsmanager.model.HdfsModel;
+import hdfsmanager.support.command.ActionEnum;
+import hdfsmanager.util.PathUtil;
 import hdfsmanager.util.PopupMenuUtil;
 
 public class HdfsTreeView extends View<HdfsTreeController, HdfsModel> {
