@@ -240,7 +240,9 @@ public class MainController<V extends View<?, ?>> extends Controller<HdfsModel, 
 	public void preview(FileStatus f) {
 		if (f.isDirectory())
 			return;
-		byte[] data = model.read256KBOf(f);
+		final String name = f.getPath().getName();
+		final String suffix = StringUtil.getSuffix(name, ".");
+		byte[] data = model.read256KBOf(f, suffix);
 		DialogUtil.preview(data);
 	}
 
@@ -320,8 +322,13 @@ public class MainController<V extends View<?, ?>> extends Controller<HdfsModel, 
 		new ChPermissionAndOwnerController(model);
 	}
 
+	public void copyFiles() {
+		FileStatus[] selectedFileStatuses = model.getSelectedFileStatuses();
+		copyFiles(selectedFileStatuses);
+	}
+
 	public void copyFiles(FileStatus[] fileStatuses) {
-		copyPath(fileStatuses);
+		SysUtil.setClipboard(fileStatuses);
 		model.setPasteStatus(AppStatusDao.PasteStatus.COPY);
 	}
 
@@ -331,26 +338,25 @@ public class MainController<V extends View<?, ?>> extends Controller<HdfsModel, 
 	}
 
 	public void cutFiles(FileStatus[] fileStatuses) {
-		copyPath(fileStatuses);
+		SysUtil.setClipboard(fileStatuses);
 		model.setPasteStatus(AppStatusDao.PasteStatus.CUT);
 	}
 
 	public void pasteFiles() {
 		FileStatus[] fileStatuses = model.getSelectedFileStatuses();
-		pasteFiles(fileStatuses);
+		pasteFilesTo(fileStatuses);
 	}
 
-	public void pasteFiles(FileStatus[] fileStatuses) {
+	public void pasteFilesTo(FileStatus[] fileStatuses) {
 		if (fileStatuses.length != 1) {
 			GuiUtil.displayTray("警告", "不能将文件粘贴到多个路径下", TrayIcon.MessageType.WARNING);
 			return;
 		}
-		Optional<String> clipboardOpt = SysUtil.getClipboard();
+		final Optional<? extends FileStatus[]> clipboardOpt = SysUtil.getClipboard(fileStatuses.getClass());
 		if (!clipboardOpt.isPresent()) {
 			return;
 		}
-		String pathsStr = clipboardOpt.get();
-		String[] paths = StringUtils.split(pathsStr, "\n");
-		model.pasteFiles(paths, fileStatuses[0].getPath());
+		FileStatus[] src = clipboardOpt.get();
+		model.pasteFiles(src, fileStatuses[0].getPath());
 	}
 }

@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import hdfsmanager.support.component.RowHeaderTable;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.log4j.Logger;
 
@@ -72,6 +73,7 @@ public class HdfsTableView extends View<HdfsTableController, HdfsModel> {
 
 	private JPanel viewPanel;
 	private JTable table;
+	private JScrollPane tblScrollPane;
 
 	public HdfsTableView(HdfsTableController controller, HdfsModel model) {
 		super(controller, model);
@@ -82,7 +84,7 @@ public class HdfsTableView extends View<HdfsTableController, HdfsModel> {
 		MyTableModel tm = new MyTableModel(
 				new Object[] { "", "文件名", "大小", "用户", "权限", "修改时间" }, 0);
 		table.setModel(tm);
-
+		table.getTableHeader().setReorderingAllowed(false);
 		table.getColumnModel().getColumn(0).setMaxWidth(20);
 		table.getColumnModel().getColumn(0).setMinWidth(20);
 		MyTableCellRenderer renderer = new MyTableCellRenderer();
@@ -92,6 +94,7 @@ public class HdfsTableView extends View<HdfsTableController, HdfsModel> {
 		table.getColumnModel().getColumn(5).setCellRenderer(renderer);
 
 		table.setRowSorter(new TableRowSorter<>(tm));
+		tblScrollPane.setRowHeaderView(new RowHeaderTable(table));
 	}
 
 	@Override
@@ -193,6 +196,7 @@ public class HdfsTableView extends View<HdfsTableController, HdfsModel> {
 			return;
 		DefaultTableModel tm = (DefaultTableModel) table.getModel();
 		addRowToTable(model.getFileStatuses(), tm);
+		tblScrollPane.setRowHeaderView(new RowHeaderTable(table));
 	}
 
 	private FileStatus fetchFileStatusAt(int row) {

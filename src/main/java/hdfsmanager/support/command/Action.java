@@ -41,5 +41,5 @@ public final class Action {
 
 	static FileOperationAction cutAction = (trigger, ctr, fileStatuses) -> ctr.cutFiles(fileStatuses);
 
-	static FileOperationAction pasteAction = (trigger, ctr, fileStatuses) -> ctr.pasteFiles(fileStatuses);
+	static FileOperationAction pasteAction = (trigger, ctr, fileStatuses) -> ctr.pasteFilesTo(fileStatuses);
 }

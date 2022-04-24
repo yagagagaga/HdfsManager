@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.zip.GZIPInputStream;
 
-import hdfsmanager.util.PathUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -26,6 +26,7 @@ import hdfsmanager.support.io.DownloadFileTask;
 import hdfsmanager.support.io.UploadDirTask;
 import hdfsmanager.support.io.UploadFileTask;
 import hdfsmanager.util.IOUtil;
+import hdfsmanager.util.PathUtil;
 
 public class HdfsDaoImpl implements HdfsDao {
 
@@ -430,14 +431,32 @@ public class HdfsDaoImpl implements HdfsDao {
 
 	@Override
 	public byte[] readFile(Path path, long limit) {
-		byte[] read = new byte[0];
-		try (InputStream is = fs.open(path); ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+		return readFile(path, limit, FileType.TEXT);
+	}
+
+	@Override
+	public byte[] readFile(Path path, long limit, FileType type) {
+		InputStream is = null;
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		try {
+			switch (type) {
+			case GZIP:
+				is = new GZIPInputStream(fs.open(path));
+				break;
+			case TEXT:
+			default:
+				is = fs.open(path);
+				break;
+			}
 			IOUtil.copy(is, os, limit);
-			read = os.toByteArray();
+			return os.toByteArray();
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
+			return new byte[0];
+		} finally {
+			IOUtils.closeQuietly(is);
+			IOUtils.closeQuietly(os);
 		}
-		return read;
 	}
 
 	/**

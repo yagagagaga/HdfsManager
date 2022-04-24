@@ -39,4 +39,8 @@ public final class PathUtil {
 		String r2 = updatePath.toUri().getPath();
 		return r1.equals(r2);
 	}
+
+	public static boolean isEquals(String currentPath, String updatePath) {
+		return isEquals(new Path(currentPath), new Path(updatePath));
+	}
 }

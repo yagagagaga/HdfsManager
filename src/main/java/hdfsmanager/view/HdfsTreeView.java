@@ -32,13 +32,21 @@ public class HdfsTreeView extends View<HdfsTreeController, HdfsModel> {
 
 	private DefaultMutableTreeNode currentNode;
 
-	private static final FileStatus VOID_FILE_STATUS = new FileStatus(
+	private static final FileStatus LOADING_FILE_STATUS = new FileStatus(
 			0,
 			false,
 			0,
 			0,
 			0,
 			new Path("loading..."));
+
+	private static final FileStatus VOID_FILE_STATUS = new FileStatus(
+			0,
+			false,
+			0,
+			0,
+			0,
+			new Path("无"));
 
 	/**
 	 * 树形视图文件夹的右键菜单项目
@@ -107,6 +115,10 @@ public class HdfsTreeView extends View<HdfsTreeController, HdfsModel> {
 	}
 
 	private DefaultMutableTreeNode placeHolder() {
+		return new DefaultMutableTreeNode(LOADING_FILE_STATUS);
+	}
+
+	private DefaultMutableTreeNode placeHolder2() {
 		return new DefaultMutableTreeNode(VOID_FILE_STATUS);
 	}
 
@@ -114,11 +126,15 @@ public class HdfsTreeView extends View<HdfsTreeController, HdfsModel> {
 		DefaultTreeModel tm = (DefaultTreeModel) tree.getModel();
 		int size = tm.getChildCount(node);
 		// 先把新节点添加进来
-		for (int i = files.size() - 1; i >= 0; i--) {
-			FileStatus f = files.get(i);
-			DefaultMutableTreeNode child = new DefaultMutableTreeNode(f);
-			tm.insertNodeInto(child, node, size);
-			tm.insertNodeInto(placeHolder(), child, 0);
+		if (files.isEmpty()) {
+			tm.insertNodeInto(placeHolder2(), node, size);
+		} else {
+			for (int i = files.size() - 1; i >= 0; i--) {
+				FileStatus f = files.get(i);
+				DefaultMutableTreeNode child = new DefaultMutableTreeNode(f);
+				tm.insertNodeInto(child, node, size);
+				tm.insertNodeInto(placeHolder(), child, 0);
+			}
 		}
 		// 再把旧节点删除
 		for (int i = size; i > 0; i--) {

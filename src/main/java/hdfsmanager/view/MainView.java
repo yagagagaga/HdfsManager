@@ -112,7 +112,7 @@ public class MainView extends View<MainController<MainView>, HdfsModel> {
 		delFileBtn.addActionListener(e -> controller.del());
 		diskUsageBtn.addActionListener(e -> controller.diskUsage());
 		chOwnAndModBtn.addActionListener(e -> controller.chPermissionAndOwner());
-		copyBtn.addActionListener(e -> controller.copyPath());
+		copyBtn.addActionListener(e -> controller.copyFiles());
 		cutBtn.addActionListener(e -> controller.cutFiles());
 		pasteBtn.addActionListener(e -> controller.pasteFiles());
 	}

@@ -70,6 +70,8 @@ public interface HdfsDao {
 
 	byte[] readFile(Path path, long limit);
 
+	byte[] readFile(Path path, long limit, FileType type);
+
 	void concat(String savedFilePath, String... otherFilePaths);
 
 	boolean isDirectory(Path dst) throws IOException;
@@ -77,4 +79,8 @@ public interface HdfsDao {
 	void changePermission(Path path, FsPermission p) throws IOException;
 
 	void changeOwner(Path path, String owner, String group) throws IOException;
+
+	enum FileType {
+		GZIP, TEXT
+	}
 }

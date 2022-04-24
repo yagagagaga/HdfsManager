@@ -179,7 +179,6 @@ public class MainBottomView extends View<MainBottomController, DownUploadTaskMod
 				// 将扫描到的字符流输出到指定的JTextArea组件
 				while (scanner.hasNextLine()) {
 					try {
-						Thread.sleep(100);
 						String line = scanner.nextLine();
 						logArea.append(line);
 						logArea.append("\n");

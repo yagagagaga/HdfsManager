@@ -76,8 +76,14 @@ public class HdfsModel extends Model {
 		updateFileStatusFrom(p, true);
 	}
 
-	public byte[] read256KBOf(FileStatus f) {
-		return hdfsDao.readFile(f.getPath(), FileUtils.ONE_MB >> 2);
+	public byte[] read256KBOf(FileStatus f, String fileType) {
+		switch (fileType) {
+		case "gzip":
+		case "gz":
+			return hdfsDao.readFile(f.getPath(), FileUtils.ONE_MB >> 2, HdfsDao.FileType.GZIP);
+		default:
+			return hdfsDao.readFile(f.getPath(), FileUtils.ONE_MB >> 2);
+		}
 	}
 
 	public Path getCurrentPath() {
@@ -164,6 +170,7 @@ public class HdfsModel extends Model {
 	public boolean rename(String src, String dst) {
 		try {
 			hdfsDao.rename(src, dst);
+			log.info("成功将【" + src + "】重命名为【" + dst + "】");
 			return true;
 		} catch (IOException | IllegalArgumentException e) {
 			String errorMsg = "重命名失败，因为发生了" + e.getMessage();
@@ -337,13 +344,14 @@ public class HdfsModel extends Model {
 		appDao.setPasteStatus(status);
 	}
 
-	public void pasteFiles(String[] paths, Path target) {
+	public void pasteFiles(FileStatus[] src, Path target) {
 		AppStatusDao.PasteStatus pasteStatus = appDao.getPasteStatus();
 		String tgt = target.toString();
 		switch (pasteStatus) {
 		case CUT:
-			for (String path : paths) {
+			for (FileStatus fs : src) {
 				try {
+					String path = fs.getPath().toString();
 					hdfsDao.movefile(path, tgt);
 					log.info("成功将【" + path + "】挪到【" + tgt + "】");
 				} catch (IOException e) {
@@ -355,8 +363,9 @@ public class HdfsModel extends Model {
 			updateFileStatusFrom(getCurrentPath(), false);
 			break;
 		case COPY:
-			for (String path : paths) {
+			for (FileStatus fs : src) {
 				try {
+					String path = fs.getPath().toString();
 					hdfsDao.copyFile(path, tgt);
 					log.info("成功将【" + path + "】复制到【" + tgt + "】");
 				} catch (IOException e) {

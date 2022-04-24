@@ -29,7 +29,7 @@ public final class DialogUtil {
 
 	@SuppressWarnings("all")
 	public static Optional<String> input(String msg, String title, String placeholder, MsgType type) {
-		final String userInputString = JOptionPane.showInputDialog(null, msg, title, type.getLevel());
+		final String userInputString = (String) JOptionPane.showInputDialog(null, msg, title, type.getLevel(), null, null, placeholder);
 
 		if (userInputString != null) {
 			return Optional.of(userInputString);

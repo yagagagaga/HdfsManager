@@ -1,5 +1,8 @@
 package hdfsmanager.util;
 
+import org.apache.commons.lang.StringUtils;
+
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -31,5 +34,12 @@ public final class StringUtil {
 
 	public static <T> String mkString(T[] array, String delimiter) {
 		return mkString(Arrays.asList(array), delimiter);
+	}
+
+	public static String getSuffix(String src, String delimiter) {
+		final String[] split = StringUtils.split(src, delimiter);
+		if (split.length == 0)
+			return "";
+		return split[split.length - 1];
 	}
 }
