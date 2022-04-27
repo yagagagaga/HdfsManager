@@ -8,30 +8,34 @@
     <artifactId>HdfsManager</artifactId>
     <version>0.0.3-SNAPSHOT</version>
 
+    <properties>
+        <haddop.version>3.2.3</haddop.version>
+    </properties>
+
     <dependencies>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
-            <version>2.7.0</version>
+            <version>${haddop.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
-            <version>2.7.0</version>
+            <version>${haddop.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>3.2.3</version>
+            <version>${haddop.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-yarn-client</artifactId>
-            <version>2.7.0</version>
+            <version>${haddop.version}</version>
         </dependency>
 
         <dependency>
