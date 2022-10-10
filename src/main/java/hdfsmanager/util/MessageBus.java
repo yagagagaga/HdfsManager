@@ -16,7 +16,7 @@ public final class MessageBus {
 	}
 
 	private synchronized static BlockingQueue<Object> getOrCreateQueue(String topic) {
-		if (org.apache.commons.lang.StringUtils.isEmpty(topic)) {
+		if (org.apache.commons.lang3.StringUtils.isEmpty(topic)) {
 			throw new NullPointerException("传入的 topic 不能为空");
 		}
 
