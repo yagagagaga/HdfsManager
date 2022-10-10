@@ -9,7 +9,7 @@
 	<version>0.0.3-SNAPSHOT</version>
 
 	<properties>
-		<haddop.version>3.2.3</haddop.version>
+		<haddop.version>3.2.4</haddop.version>
 	</properties>
 
 	<dependencies>
